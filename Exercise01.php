@@ -21,11 +21,16 @@ session_start();
         <br>
         <br>
         <label for="value">New value:</label>
-        <input type="text" id="value" name="value" required><br><br>
+        <input type="number" id="value" name="value" required><br><br>
         <button type="submit" name="modify">Modify</button>
         <button type="submit" name="average">Average</button>
         <button type="reset" naem="reset">Reset</button>
+        <!-- puede que los button sean input -->
     </form>
+    <p>Current Array: <?php echo implode(separator: ", ", array: $_SESSION['numbers']); ?></p>
+    <?php if (isset($average)) {
+        echo "<p>Average: $average </p>";
+    } ?>
 </body>
 
 </html>
