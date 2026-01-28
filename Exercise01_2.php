@@ -15,9 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <?php
-    if (isset($_SESSION['modify'])) { //
-        $value = $_SESSION['modify'];
-        echo "<h1>Welcome back, $name!</h1>";
+    if (isset($_SESSION['modify'])) { //en el caso que haya clicado modify
+        $value = $_SESSION['modify']; //guardamos en una variable
+        $position = $_SESSION['position']; //tmb
+        //modify position selected
         // remove all session variables
         session_unset();
 
