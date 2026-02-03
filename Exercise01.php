@@ -1,7 +1,4 @@
-<!-- page1.php -->
-<?php
-session_start();
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +7,30 @@ session_start();
 </head>
 
 <body>
+
+    <?php
+    session_start(); // Resume the session
+    if(isset ($_SESSION['number'])) {
+        $array = [10, 20, 30]; 
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Store the user input in the session
+        if (isset($_SESSION['modify'])) { //en el caso que haya clicado modify
+            $value = $_SESSION['modify']; //guardamos en una variable
+            $position = $_SESSION['position']; //tmb
+
+            //modify position selected
+
+
+        } else {
+            echo "<h1>No session data found!</h1>";
+        }
+    }
+    ?>
+
+
+
     <h1>Modify array saved in session</h1>
     <form action="Exercise01_2.php" method="POST">
         <label for="value">Position to modify:</label>
