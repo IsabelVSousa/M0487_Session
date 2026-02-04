@@ -9,6 +9,8 @@
 
     <?php
     session_start(); // Resume the session
+
+
     if (!isset($_SESSION['market'])) { //!si no existe el array
         $_SESSION['market'] = array("milk" => 0, "soft_drink" => 0);
     }
@@ -69,12 +71,10 @@
     </form>
 
     <h2>Inventory:</h2>
-    <?php if (isset($average)) {
+    <?php if (isset($_SESSION['market'])) {
         //cambiar el nombre de las variables
-        echo "<p>Worker: $average </p>";
-        echo "<p>Units milk: $average </p>";
-        echo "<p>Units soft drink: $average </p>";
-    } ?>
+        echo implode(separator: ", ", array: $_SESSION['market']); 
+        } ?>
 </body>
 
 </html>
