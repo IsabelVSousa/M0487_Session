@@ -9,16 +9,17 @@
 
     <?php
     session_start(); // Resume the session
-    if (!isset($_SESSION['numbers'])) { //!si no existe el array
-        $_SESSION['numbers'] = [10, 20, 30];
+    if (!isset($_SESSION['market'])) { //!si no existe el array
+        $_SESSION['market'] = array("milk" => 0, "soft_drink" => 0);
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Store the user input in the session
-        if (isset($_POST['modify'])) { //en el caso que haya clicado modify
+        if (isset($_POST['add'])) { //en el caso que haya clicado add
+
 
             $value = $_POST['value']; //guardamos en una variable
-            $position = $_POST['position']; //tmb
+            $drink = $_POST['position']; //tmb
 
             //modify position selected
             //alteramos los datos guardados en el session con los datos post
@@ -32,7 +33,7 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Store the user input in the session
-        if (isset($_POST['average'])) { //en el caso que haya clicado average
+        if (isset($_POST['remove'])) { //en el caso que haya clicado average
            
             //sumar y contar el array
             $total = array_sum($_SESSION['numbers']);
@@ -61,7 +62,7 @@
         <br>
         <label for="value">Product quantity:</label>
         <input type="number" id="value" name="value"><br><br>
-        <button type="submit" name="modify">Modify</button>
+        <button type="submit" name="add">Add</button>
         <button type="submit" name="remove">Remove</button>
         <button type="reset" naem="reset">Reset</button>
         <!-- puede que los button sean input -->
@@ -69,6 +70,7 @@
 
     <h2>Inventory:</h2>
     <?php if (isset($average)) {
+        //cambiar el nombre de las variables
         echo "<p>Worker: $average </p>";
         echo "<p>Units milk: $average </p>";
         echo "<p>Units soft drink: $average </p>";
