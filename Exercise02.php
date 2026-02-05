@@ -37,10 +37,12 @@
         if (isset($_POST['remove'])) { //en el caso que haya clicado average
 
             //sumar y contar el array
-            $total = array_sum($_SESSION['numbers']);
-            $count = count($_SESSION['numbers']);
+            $value = $_POST['value']; //guardamos en una variable
+            $drink = $_POST['position']; //tmb
 
-            $average = number_format($total / $count, 2);
+             //modify position selected
+            //alteramos los datos guardados en el session con los datos post
+            $_SESSION['market'][$drink] =[$drink - $value];
         }
         // else {
         //     echo "<h1>No session data found!</h1>";
