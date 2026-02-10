@@ -18,7 +18,7 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Store the user input in the session
         if (isset($_POST['add'])) { //en el caso que haya clicado add
-
+            $worker = $_POST['name'];
 
             $value = $_POST['value']; //guardamos en una variable
             $drink = $_POST['position']; //tmb
@@ -36,13 +36,18 @@
         // Store the user input in the session
         if (isset($_POST['remove'])) { //en el caso que haya clicado average
 
+            $worker = $_POST['name'];
             //sumar y contar el array
             $value = $_POST['value']; //guardamos en una variable
             $drink = $_POST['position']; //tmb
 
              //modify position selected
             //alteramos los datos guardados en el session con los datos post
-            $_SESSION['market'][$drink] =[$drink - $value];
+            if($value<=$_SESSION['market'][$drink]){
+                $_SESSION['market'][$drink] = $_SESSION['market'][$drink] - $value;
+            } else {
+                echo "<h1> value bigger than inventory<h1>";
+            }
         }
         // else {
         //     echo "<h1>No session data found!</h1>";
@@ -74,6 +79,7 @@
 
     <h2>Inventory:</h2>
     <?php if (isset($_SESSION['market'])) {
+        echo "<p>Worker's name: $worker <p>";   
         //cambiar el nombre de las variables
         // echo implode(separator: ", ", array: $_SESSION['market']);
         var_dump($_SESSION['market']);
