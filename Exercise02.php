@@ -11,49 +11,45 @@
     session_start(); // Resume the session
 
 
-    if (!isset($_SESSION['market'])) { //!si no existe el array
+    if (!isset($_SESSION['market']) && !isset($_SESSION['worker'])) { //!si no existe el array
         $_SESSION['market'] = array("milk" => 0, "soft_drink" => 0);
+        $_SESSION['worker'] = " ";
     }
+
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Store the user input in the session
+        if (!empty($_POST['name'])) {
+            $_SESSION['worker'] = $_POST['name'];
+        }
+
         if (isset($_POST['add'])) { //en el caso que haya clicado add
-            $worker = $_POST['name'];
+
+            // $worker = $_POST['name'];
 
             $value = $_POST['value']; //guardamos en una variable
             $drink = $_POST['position']; //tmb
 
             //modify position selected
             //alteramos los datos guardados en el session con los datos post
-            $_SESSION['market'][$drink] = $value;
+            $_SESSION['market'][$drink] += $value;
         }
-        // else {
-        //     echo "<h1>No session data found!</h1>";
-        // }
-    }
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Store the user input in the session
         if (isset($_POST['remove'])) { //en el caso que haya clicado average
 
-            $worker = $_POST['name'];
+            // $worker = $_POST['name'];
             //sumar y contar el array
             $value = $_POST['value']; //guardamos en una variable
             $drink = $_POST['position']; //tmb
 
-             //modify position selected
+            //modify position selected
             //alteramos los datos guardados en el session con los datos post
-            if($value<=$_SESSION['market'][$drink]){
+            if ($value <= $_SESSION['market'][$drink]) {
                 $_SESSION['market'][$drink] = $_SESSION['market'][$drink] - $value;
             } else {
-                echo "<h1>Error: value bigger than inventory<h1>";
+                echo "<h1>Error: value bigger than inventory</h1>";
             }
         }
-        // else {
-        //     echo "<h1>No session data found!</h1>";
-        // }
     }
-
     ?>
 
     <h1>Supermarket management</h1>
@@ -79,7 +75,7 @@
 
     <h2>Inventory:</h2>
     <?php if (isset($_SESSION['market'])) {
-        echo "<p>Worker's name: $worker <p>";   
+        echo "<p>Worker's name:" .  $_SESSION['worker'] . "<p>";
         //cambiar el nombre de las variables
         // echo implode(separator: ", ", array: $_SESSION['market']);
         var_dump($_SESSION['market']);
