@@ -46,7 +46,7 @@
             if($value<=$_SESSION['market'][$drink]){
                 $_SESSION['market'][$drink] = $_SESSION['market'][$drink] - $value;
             } else {
-                echo "<h1> value bigger than inventory<h1>";
+                echo "<h1>Error: value bigger than inventory<h1>";
             }
         }
         // else {
