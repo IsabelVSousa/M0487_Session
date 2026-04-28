@@ -7,6 +7,7 @@
 
 <body>
 
+    //CAMBIO PARA PROBAR LAS BRANCHES
     <?php
     session_start(); // Resume the session
     if (!isset($_SESSION['numbers'])) { //!si no existe el array
